@@ -19,6 +19,9 @@ For example, if you did something like this, when run it would make a file in ./
 Other than that, the options should be pretty easy to understand.
 
 
+![alt text](images/doppler-azure-example2.png "Screenshot in azure")
+
+
 No guarantees or SLA's given, use at own risk, yada yada yada. Enjoy!
 
 
