@@ -1,0 +1,102 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "f63b30b7-c34e-45bc-b773-9e7325571e18",
+    "name": "dm-azure-doppler",
+    "friendlyName": "Digital Makers - Doppler Setup",
+    "description": "Use a doppler.com service token to prepare a build or release pipeline in Azure DevOps.",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "DigitalMakers",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "minimumAgentVersion": "2.115.0",
+    "instanceNameFormat": "Doppler Setup",
+    "showEnvironmentVariables": true,
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "serviceToken",
+            "type": "string",
+            "label": "Doppler Service Token",
+            "required": true,
+            "defaultValue": "$(DOPPLER_TOKEN)",
+            "helpMarkDown": "Log into your Doppler.com account, go to the config you want, and generate a Service Token. This token gives the task context and authentication for a project, stage, and config. They are neat."
+        },
+        {
+            "name": "workingDirectory",
+            "type": "filePath",
+            "label": "Working Directory",
+            "defaultValue": "",
+            "required": false
+        },
+        {
+            "name": "runFileProcessing",
+            "type": "boolean",
+            "label": "Reconstruct *_BASE64 secrets using their corresponding *_FILENAME setting.",
+            "defaultValue": "true",
+            "required": false,
+            "helpMarkDown": "If true, any secret keys that end with _BASE64 will be base64 decoded and named using the value of a corresponding *_FILENAME key. This supports writing to paths relative to the Working Directory."
+        },
+        {
+            "name": "runEnvCreation",
+            "type": "boolean",
+            "label": "Make a .env file using the secrets available.",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "If true, this task will create a .env file in the root of the Working Directory. It's not really the point of Doppler, so try not to need this..."
+        },
+        {
+            "name": "clearEnvFile",
+            "type": "boolean",
+            "label": "Delete any .env file already in the repo first",
+            "defaultValue": "true",
+            "required": false,
+            "helpMarkDown": "If true, this first delete an existing .env file in the root of the Working Directory. Only does so if .env writing is enabled above."
+        },
+        {
+            "name": "installDoppler",
+            "type": "boolean",
+            "label": "Install Doppler CLI",
+            "defaultValue": "true",
+            "required": false,
+            "helpMarkDown": "This will install the doppler cli on the agent (during pre-execution phase). You probably want to leave this ticked, unless you're running your own self-hosted agents that already have doppler cli installed."
+        },
+        {
+            "name": "setAzureEnvs",
+            "type": "boolean",
+            "label": "Set Azure pipeline environment based on Doppler config",
+            "defaultValue": "true",
+            "required": false,
+            "helpMarkDown": "This will set all the environment variables for tasks in the pipeline, based on the provided Doppler config. It will overwrite any that exist already. This runs during the pre-execution phase."
+        }
+    ],
+    "prejobexecution": {
+        "Node10": {
+            "target": "doppler-pre.js",
+            "argumentFormat": ""
+        }
+    },
+    "execution": {
+        "Node10": {
+            "target": "doppler.js",
+            "argumentFormat": ""
+        }
+    },
+    "messages": {
+        "GeneratingScript": "Generating script.",
+        "JS_ExitCode": "Bash exited with code '%s'.",
+        "JS_FormattedCommand": "Formatted command: %s",
+        "JS_InvalidFilePath": "Invalid file path '%s'.",
+        "JS_ScriptContents": "Script contents:",
+        "JS_Stderr": "Bash wrote one or more lines to the standard error stream."
+    }
+}

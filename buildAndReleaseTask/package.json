@@ -1,0 +1,24 @@
+{
+  "name": "dm-azure-doppler",
+  "version": "1.0.0",
+  "description": "Integration with a Doppler.com secret config and optional file decoding from base64.",
+  "main": "doppler.js",
+  "scripts": {},
+  "engines": {
+    "node": ">=11.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": "Digital Makers",
+  "license": "MIT",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^3.0.3-preview",
+    "shelljs": "^0.8.4",
+    "writefile": "^0.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.0",
+    "@types/q": "^1.5.4",
+    "sync-request": "^6.1.0",
+    "typescript": "4.0.2"
+  }
+}

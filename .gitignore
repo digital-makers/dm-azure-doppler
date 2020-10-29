@@ -1,0 +1,17 @@
+*/.taskkey
+*/Tests/*.js
+*.vsix
+buildAndReleaseTask/bash.js
+
+
+
+
+
+.env
+*.mobileprovision
+*.keystore
+*.p12
+
+
+ios
+android

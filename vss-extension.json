@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "dm-azure-doppler",
+    "name": "Digital Makers - Doppler Setup",
+    "version": "0.1.0",
+    "publisher": "DigitalMakers",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Integration with a Doppler.com secret config and optional file decoding from base64.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/icon.png"        
+    },
+    "files": [
+        {
+            "path": "buildAndReleaseTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildAndReleaseTask"
+            }
+        }
+    ]
+}
