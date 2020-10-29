@@ -8,37 +8,6 @@ variables:
   - group: marketplace-publish-vars
 
 stages:
-#   - stage: Run_and_publish_unit_tests
-#     jobs:
-#       - job:
-#         steps:
-#           - task: NodeTool@0
-#             displayName: 'Use Node 12.18.4'
-#             inputs:
-#               versionSpec: 12.18.4
-#           - task: TfxInstaller@3
-#             inputs:
-#               version: "v0.7.x"
-#           - task: Npm@1
-#             inputs:
-#               command: 'install'
-#               workingDir: 'buildAndReleaseTask'
-#           - task: Bash@3
-#             displayName: Compile Javascript
-#             inputs:
-#               targetType: "inline"
-#               script: |
-#                 cd buildAndReleaseTask
-#                 tsc
-#           - task: Npm@1
-#             inputs:
-#               command: 'custom'
-#               workingDir: 'buildAndReleaseTask'
-#               customCommand: 'test'
-#           - task: PublishTestResults@2
-#             inputs:
-#               testResultsFormat: 'JUnit'
-#               testResultsFiles: '**/ResultsFile.xml'
   - stage: Package_extension_and_publish_build_artifacts
     jobs:
       - job:
