@@ -7,7 +7,7 @@ const workingDirectory = tl.getPathInput('workingDirectory', /*required*/ true, 
 
 const setAzureEnvs = tl.getBoolInput('setAzureEnvs');
 
-const doppler = require('./doppler-secrets');
+const doppler = require('./doppler-secrets.js');
 
 async function run() {
     try {
