@@ -5,7 +5,7 @@ import writefile = require('writefile')
 import shell = require('shelljs');
 import fs = require('fs');
 
-import doppler = require('./doppler-secrets.js');
+const doppler = require('./doppler-secrets');
 
 
 
