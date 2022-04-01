@@ -50,7 +50,7 @@ async function run() {
             result = tl.TaskResult.Failed;
         } else {
 
-            const keys = Object.keys(secrets)
+            const keys = Object.keys(secrets);
             for (const key of keys) {
 
                 if (runEnvCreation && !key.endsWith('_BASE64')) {

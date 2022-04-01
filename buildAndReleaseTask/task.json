@@ -72,13 +72,13 @@
         }
     ],
     "prejobexecution": {
-        "Node": {
+        "Node10": {
             "target": "doppler-pre.js",
             "argumentFormat": ""
         }
     },
     "execution": {
-        "Node": {
+        "Node10": {
             "target": "doppler.js",
             "argumentFormat": ""
         }
