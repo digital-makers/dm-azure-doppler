@@ -63,14 +63,6 @@
             "helpMarkDown": "If true, this first delete an existing .env file in the root of the Working Directory. Only does so if .env writing is enabled above."
         },
         {
-            "name": "installDoppler",
-            "type": "boolean",
-            "label": "Install Doppler CLI",
-            "defaultValue": "true",
-            "required": false,
-            "helpMarkDown": "This will install the doppler cli on the agent (during pre-execution phase). You probably want to leave this ticked, unless you're running your own self-hosted agents that already have doppler cli installed."
-        },
-        {
             "name": "setAzureEnvs",
             "type": "boolean",
             "label": "Set Azure pipeline environment based on Doppler config",
@@ -80,13 +72,13 @@
         }
     ],
     "prejobexecution": {
-        "Node10": {
+        "Node14": {
             "target": "doppler-pre.js",
             "argumentFormat": ""
         }
     },
     "execution": {
-        "Node10": {
+        "Node14": {
             "target": "doppler.js",
             "argumentFormat": ""
         }

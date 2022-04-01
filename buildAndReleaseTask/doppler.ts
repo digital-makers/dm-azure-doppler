@@ -5,12 +5,16 @@ import writefile = require('writefile')
 import shell = require('shelljs');
 import fs = require('fs');
 
-const serviceToken = tl.getInput('serviceToken');
+import doppler = require('./doppler-secrets.js');
+
+
+
 const runEnvCreation = tl.getBoolInput('runEnvCreation');
 const runFileProcessing = tl.getBoolInput('runFileProcessing');
 const workingDirectory = tl.getPathInput('workingDirectory', /*required*/ true, /*check*/ true);
 
 const clearEnvFile = tl.getBoolInput('clearEnvFile');
+
 
 async function run() {
     try {
@@ -39,14 +43,13 @@ async function run() {
         })
         
         //pull in the secrets that this service token allows
-        let secretsJSON = await shell.exec(`doppler secrets --no-read-env --token=${serviceToken} --json`, {silent:true});
-        if (secretsJSON.code !== 0) {
-            console.log(`doppler secrets failed: `, secretsJSON.code, secretsJSON.stdout, secretsJSON.stderr);
+        const secrets = await doppler.getSecrets();
+        if (!secrets) {
+            console.log(`doppler secrets failed: `, secrets);
             shell.exit(1);
             result = tl.TaskResult.Failed;
         } else {
 
-            const secrets = JSON.parse(secretsJSON)
             const keys = Object.keys(secrets)
             for (const key of keys) {
 

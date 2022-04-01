@@ -11,6 +11,7 @@
   "author": "Digital Makers",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.26.1",
     "azure-pipelines-task-lib": "^3.0.3-preview",
     "shelljs": "^0.8.4",
     "writefile": "^0.2.8"

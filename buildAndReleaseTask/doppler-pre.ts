@@ -5,8 +5,9 @@ import shell = require('shelljs');
 const serviceToken = tl.getInput('serviceToken');
 const workingDirectory = tl.getPathInput('workingDirectory', /*required*/ true, /*check*/ true);
 
-const installDoppler = tl.getBoolInput('installDoppler');
 const setAzureEnvs = tl.getBoolInput('setAzureEnvs');
+
+import doppler = require('./doppler-secrets.js');
 
 async function run() {
     try {
@@ -16,31 +17,17 @@ async function run() {
         console.log('========================== Starting Command Output ===========================');
         
         console.log(`workingDirectory: ${workingDirectory}`)
-        console.log(`installDoppler: ${installDoppler}`)
         console.log(`setAzureEnvs: ${setAzureEnvs}`)
         
-        //run the setup to install doppler
-        if (installDoppler) {
-            let shellResult = await shell.exec('(curl -Ls https://cli.doppler.com/install.sh || wget -qO- https://cli.doppler.com/install.sh) | sh');
-            if (shellResult.code !== 0) {
-                console.log(`doppler install failed: `, shellResult.code, shellResult.stdout, shellResult.stderr);
-                shell.exit(1);
-                result = tl.TaskResult.Failed;
-            } else {
-                console.log('doppler installed ', shellResult.stdout);
-            }
-        }
         
         
         //pull in the secrets that this service token allows
-        let secretsJSON = await shell.exec(`doppler secrets --no-read-env --token=${serviceToken} --json`, {silent:true});
-        if (secretsJSON.code !== 0) {
-            console.log(`doppler secrets failed, check your token is correct: `, secretsJSON.code, secretsJSON.stdout, secretsJSON.stderr);
+        const secrets = await doppler.getSecrets();
+        if (!secrets) {
+            console.log(`doppler secrets failed, check your token is correct: `, secrets);
             shell.exit(1);
             result = tl.TaskResult.Failed;
         } else {
-
-            const secrets = JSON.parse(secretsJSON)
             const keys = Object.keys(secrets)
             for (const key of keys) {
 
