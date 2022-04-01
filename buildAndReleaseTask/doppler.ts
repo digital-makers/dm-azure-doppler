@@ -63,10 +63,13 @@ async function run() {
                 //then convert them back using the relevent *_FILENAME secret.
                 if (runFileProcessing && key.endsWith('_BASE64')) {
 
-                    let filenameKey = key.substr(0, ( key.length-('_BASE64'.length)) ).concat('_FILENAME')
-                    let fileFullPath = path.join(workingDirectory, secrets[filenameKey].computed);
+                    console.log(`key: ${key}`);
+                    let filenameKey = key.substring(0, ( key.length-('_BASE64'.length)) ).concat('_FILENAME')
+                    console.log(`filenameKey: ${filenameKey}`);
 
                     if (secrets[filenameKey]) {
+
+                        let fileFullPath = path.join(workingDirectory, secrets[filenameKey].computed);
 
 
                         //decode from base64
