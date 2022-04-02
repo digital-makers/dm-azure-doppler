@@ -15,3 +15,7 @@ buildAndReleaseTask/bash.js
 
 ios
 android
+
+
+
+buildAndReleaseTask/test.js
