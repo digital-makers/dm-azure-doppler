@@ -33,7 +33,7 @@ async function run() {
 
                 if (setAzureEnvs && !key.endsWith('_BASE64')) {
                     //set the Azure pipeline variables, but again, ignore any base64 ones because of potential size.
-                    tl.setVariable(key, secrets[key].computed, false)
+                    tl.setVariable(key, secrets[key], false)
                     console.log(`Set ENV: ${key}`)
                 }
 

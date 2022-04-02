@@ -55,7 +55,7 @@ async function run() {
 
                 if (runEnvCreation && !key.endsWith('_BASE64')) {
                     //if we're writing to a dotenv file, do it (but not any that end with _BASE64 cos they are massive)
-                    dotenvfile.write(`\n${key}=${secrets[key].computed}`)
+                    dotenvfile.write(`\n${key}=${secrets[key]}`)
                     console.log(`Wrote ENV: ${key}`)
                 }
 
@@ -69,11 +69,11 @@ async function run() {
 
                     if (secrets[filenameKey]) {
 
-                        let fileFullPath = path.join(workingDirectory, secrets[filenameKey].computed);
+                        let fileFullPath = path.join(workingDirectory, secrets[filenameKey]);
 
 
                         //decode from base64
-                        let buff = Buffer.from(secrets[key].computed, 'base64');
+                        let buff = Buffer.from(secrets[key], 'base64');
                         await writefile(fileFullPath, buff);
                         console.log(`The contents of ${key} have been decoded to: ${fileFullPath} `)
 
